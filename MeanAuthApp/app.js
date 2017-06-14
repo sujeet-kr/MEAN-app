@@ -9,7 +9,7 @@ const config = require('./config/database');
 mongoose.connect(config.database);
 
 mongoose.connection.on('connected',()=>{
-  console.log('Connected to DB') + config.database;
+  console.log('Connected to DB ' + config.database);
 });
 
 mongoose.connection.on('error', (err)=>{
@@ -29,6 +29,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //calling out the body parser middleware
 app.use(bodyParser.json());
+
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
 
 app.use('/users', users);
 
