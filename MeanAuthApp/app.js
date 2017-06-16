@@ -43,6 +43,10 @@ app.get("/", (req, res)=>{
   res.send("Hi! this is Sujeet");
 });
 
+app.get("*", (req, res)=>{
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
 //starting the server
 app.listen(port, () => {
   console.log("Server started on port " + port);
